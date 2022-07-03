@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  balena-net6-test.api:
+    image: ${DOCKER_REGISTRY-}balenanet6testapi
+    build:
+      context: .
+      dockerfile: Balena-Net6-Test.Api/Dockerfile
