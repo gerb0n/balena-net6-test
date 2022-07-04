@@ -1,11 +1,13 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+#FROM balenalib/amd64-dotnet:6.0-aspnet AS base
+FROM balenalib/raspberrypi4-64-dotnet:6.0-aspnet AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+#FROM balenalib/amd64-dotnet:6.0-sdk AS build
+FROM balenalib/raspberrypi4-64-dotnet:6.0-sdk AS build
 WORKDIR /src
 COPY ["Balena-Net6-Test.Api/Balena-Net6-Test.Api.csproj", "Balena-Net6-Test.Api/"]
 RUN dotnet restore "Balena-Net6-Test.Api/Balena-Net6-Test.Api.csproj"
@@ -20,3 +22,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Balena-Net6-Test.Api.dll"]
+
